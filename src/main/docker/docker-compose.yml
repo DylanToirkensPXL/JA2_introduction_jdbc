@@ -14,4 +14,18 @@ services:
       # Password for root access
       MYSQL_ROOT_PASSWORD: 'admin'
     volumes:
-      - ./data.sql:/docker-entrypoint-initdb.d/0_init.sql
+      - ./musicdb.sql:/docker-entrypoint-initdb.d/0_init.sql
+  student-db:
+    image: mysql:5.6
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: 'studentdb'
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: 'user'
+      # You can use whatever password you like
+      MYSQL_PASSWORD: 'password'
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: 'admin'
+    volumes:
+      - ./studentdb.sql:/docker-entrypoint-initdb.d/0_init.sql
